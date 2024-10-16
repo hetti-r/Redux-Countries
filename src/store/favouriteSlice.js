@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { isLoading } from "./countriesSlice";
-import { addFavouriteToFirebase } from "../auth/firebase";
-import { collection, query } from "firebase/firestore";
+import {
+  addFavouriteToFirebase,
+  auth,
+  clearFavouritesFromFirebase,
+  db,
+  removeFavouriteToFirebase,
+} from "../auth/firebase";
+import { collection, getDocs, query } from "firebase/firestore";
 
 const initialState = {
   favourites: [],
@@ -17,14 +22,24 @@ export const favouriteSlice = createSlice({
       const user = auth.currentUser;
       if (user) addFavouriteToFirebase(user.uid, action.payload);
     },
-    clearFavourite(state) {
+
+    clearFavourites(state) {
+      const user = auth.currentUser;
+      if (user) clearFavouritesFromFirebase(user.uid);
       state.favourites = [];
     },
-    getFavourites(state, action) {},
+    getFavourites(state, action) {
+      state.favourites = action.payload;
+    },
     removeFavourite(state, action) {
       state.favourites = state.favourites.filter(
         (favourite) => favourite !== action.payload
       );
+      const user = auth.currentUser;
+      if (user) removeFavouriteToFirebase(user.uid, action.payload);
+    },
+    isLoading(state, action) {
+      state.isLoading = action.payload;
     },
   },
 });
@@ -32,13 +47,20 @@ export const favouriteSlice = createSlice({
 export const getFavouritesFromSource = () => async (dispatch) => {
   const user = auth.currentUser;
   if (user) {
-    const q = query(collection(db, `users/${user.id}/favourites`));
-    const favourites = q.docs.map((doc) => doc.data().name);
-    dispatch;
+    const q = query(collection(db, `users/${user.uid}/favourites`));
+    const querySnapshot = await getDocs(q);
+    const favourites = querySnapshot.docs.map((doc) => doc.data().name);
+    dispatch(getFavourites(favourites));
+    dispatch(isLoading(false));
   }
 };
 
-export const { addFavourite, clearFavourite, removeFavourite } =
-  favouriteSlice.actions;
+export const {
+  addFavourite,
+  clearFavourites,
+  removeFavourite,
+  getFavourites,
+  isLoading,
+} = favouriteSlice.actions;
 
 export default favouriteSlice.reducer;

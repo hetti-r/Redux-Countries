@@ -12,6 +12,7 @@ import Login from './components/Login'
 import ProtectedRoute from './auth/ProtectedRoute'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from './auth/firebase'
+import './global.css';
 
 const App = () => {
 

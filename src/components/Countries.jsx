@@ -5,6 +5,7 @@ import { initializeCountries } from "../services/countriesServices";
 import { LinkContainer } from "react-router-bootstrap";
 import { search } from "../store/countriesSlice";
 import { addFavourite, removeFavourite } from "../store/favouriteSlice";
+import CountryCard from "./CountryCard";
 
 const Countries = () => {
     const dispatch = useDispatch();
@@ -62,46 +63,7 @@ const Countries = () => {
                     })
 
                     .map((country) => (
-                        <Col className="mt-5" key={country.name.official}>
-                            <Card className="h-100">
-                                <LinkContainer to={`/countries/${country.name.common}`}
-                                    state={{ country: country }}>
-                                    <Card.Img
-                                        variant="top"
-                                        src={country.flags.svg}
-                                        alt={country.name.common}
-                                        className="rounded h-50"
-                                        style={{
-                                            objectFit: "cover",
-                                            minHeight: "200px",
-                                            maxHeight: "200px"
-                                        }} />
-                                </LinkContainer>
-                                <Card.Body className="d-flex flex-column">
-                                    <Card.Title>{country.name.common}</Card.Title>
-                                    <Card.Subtitle className="mb-5 text-muted">{country.name.official}</Card.Subtitle>
-                                    <ListGroup variant="flush" className="flex-grow-1 justify-content-center">
-                                        <ListGroup.Item>
-                                            <i className="bi bi-people me-2">{country.population}</i>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item>
-                                            <i className="me-2">{Object.values(country.currencies || {})
-                                                .map((currency) => currency.name)
-                                                .join(', ') || "No currency"
-                                            }</i>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item>
-                                            <i className="me-2">{Object.values(country.languages || {})
-                                                .map((language) => language)
-                                                .join(', ') || "No language"
-                                            }</i>
-                                        </ListGroup.Item>
-                                    </ListGroup>
-                                    <Button variant="primary" onClick={() => dispatch(addFavourite(country.name.common))}>Add Favourite</Button>
-                                    <Button variant="warning" onClick={() => dispatch(removeFavourite(country.name.common))}>Remove Favourite</Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
+                        <CountryCard key={country.name.common} country={country} />
                     ))}
             </Row>
         </Container>

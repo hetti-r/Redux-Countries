@@ -10,9 +10,12 @@ import {
   addDoc,
   collection,
   deleteDoc,
+  getDocs,
   getFirestore,
   query,
+  where,
 } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -59,7 +62,14 @@ const registerWithEmailAndPassword = async (name, email, password) => {
 };
 
 const logout = () => {
-  signOut(auth);
+  signOut(auth)
+    .then(() => {
+      // Redirect to home page after successful logout
+      window.location.href = "/";
+    })
+    .catch((error) => {
+      console.error("Error signing out: ", error);
+    });
 };
 
 const addFavouriteToFirebase = async (uid, name) => {

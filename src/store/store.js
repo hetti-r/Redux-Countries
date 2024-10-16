@@ -5,5 +5,6 @@ import favouriteReducer from "./favouriteSlice";
 export const store = configureStore({
   reducer: {
     countries: countriesReducer,
+    favourites: favouriteReducer,
   },
 });

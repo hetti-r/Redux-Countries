@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { auth, loginWithEmailAndPassword } from "../auth/firebase"
 import { useNavigate } from "react-router-dom"
@@ -12,6 +12,13 @@ const Login = () => {
     const [user, loading, error] = useAuthState(auth);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        //check if user is logged in then redirect to countries page
+        if (user) {
+            navigate('/countries');
+        }
+    }, [user, navigate]);
 
     const handleLogin = () => {
         if (!email && !password) {
