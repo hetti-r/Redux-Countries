@@ -19,7 +19,7 @@ A full-stack app for searching countries and showing basic country and weather i
 - Styling: Bootstrap, React Icons
 - APIs: Rest Countries, Firebase Firestore, Open Weather
 
-### Live page [here]()
+### [Live Page](https://reactreduxcountries.netlify.app/)
 
 ![countries page preview](preview2.png)
 
