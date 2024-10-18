@@ -23,11 +23,16 @@ export const countriesSlice = createSlice({
     search(state, action) {
       state.search = action.payload;
     },
+
+    clearSearch(state) {
+      state.search = "";
+    },
   },
 
   extraReducers() {},
 });
 
-export const { getCountries, isLoading, search } = countriesSlice.actions;
+export const { getCountries, isLoading, search, clearSearch } =
+  countriesSlice.actions;
 // this is  the connectiuon to store.js
 export default countriesSlice.reducer;

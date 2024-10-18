@@ -1,10 +1,7 @@
 import { useEffect } from "react";
-import { Button, Card, Col, Container, Form, ListGroup, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { initializeCountries } from "../services/countriesServices";
-import { LinkContainer } from "react-router-bootstrap";
-import { search } from "../store/countriesSlice";
-import { addFavourite, removeFavourite } from "../store/favouriteSlice";
+import { initializeCountries, search, clearSearch } from "../services/countriesServices";
 import CountryCard from "./CountryCard";
 
 const Countries = () => {
@@ -13,12 +10,13 @@ const Countries = () => {
     const isLoading = useSelector((state) => state.countries.isLoading);
     const searchInput = useSelector((state) => state.countries.search);
 
-    console.log("Countries: ", countries);
-    console.log("isLoading: ", isLoading);
-
     useEffect(() => {
         dispatch(initializeCountries());
     }, [dispatch]);
+
+    const handleClearSearch = () => {
+        dispatch(clearSearch());
+    };
 
     // Handle the loading case here first (use Col, and Spinner)
     if (isLoading) {
@@ -42,15 +40,23 @@ const Countries = () => {
         <Container fluid>
             <Row>
                 <Col className="mt-5 d-flex justify-content-center">
-                    <Form>
+                    <Form className="d-flex">
                         <Form.Control
                             style={{ width: '18rem' }}
                             type="search"
                             className="me-2"
                             placeholder="Search"
                             aria-label="Search"
+                            value={searchInput}
                             onChange={(e) => dispatch(search(e.target.value))}
                         />
+                        <Button
+                            variant="light"
+                            onClick={handleClearSearch}
+                            disabled={!searchInput}
+                        >
+                            Clear
+                        </Button>
                     </Form>
                 </Col>
             </Row>
@@ -61,7 +67,6 @@ const Countries = () => {
                             .toLowerCase()
                             .includes(searchInput.toLowerCase())
                     })
-
                     .map((country) => (
                         <CountryCard key={country.name.common} country={country} />
                     ))}

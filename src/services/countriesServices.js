@@ -1,5 +1,10 @@
 import axios from "axios";
-import { getCountries, isLoading } from "../store/countriesSlice";
+import {
+  getCountries,
+  isLoading,
+  clearSearch,
+  search,
+} from "../store/countriesSlice";
 
 const baseUrl = "https://restcountries.com/v3.1/all";
 
@@ -22,4 +27,4 @@ const initializeCountries = () => {
   };
 };
 
-export { getAllCountries, initializeCountries };
+export { getAllCountries, initializeCountries, search, clearSearch };
