@@ -12,17 +12,19 @@ const CountrySingle = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        setIsWeatherLoading(true);
         axios
             .get(
-                `https://api.openweathermap.org/data/2.5/weather?q=${country.capital
-                }&units=metric&appid=${import.meta.env.VITE_WEATHER_API_KEY}`
+                `https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&units=metric&appid=${import.meta.env.VITE_WEATHER_API_KEY}`
             )
-            .catch((error) => {
-                console.log(error);
-            })
             .then((response) => {
                 setWeather(response.data);
                 setIsWeatherLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error fetching weather data:", error);
+                setIsWeatherLoading(false);
+                setWeather(null); // Set weather to null to indicate an error
             });
     }, [country.capital]);
 
@@ -43,13 +45,31 @@ const CountrySingle = (props) => {
         );
     }
 
+    if (!weather) {
+        return (
+            <Container fluid>
+                <Row>
+                    <Col className="mt-5 text-center">
+                        <h2>Error loading weather data</h2>
+                        <p>Unable to fetch weather information for {country.capital}</p>
+                        <Button variant="light" onClick={() => navigate("/countries")}>
+                            Back to Countries
+                        </Button>
+                    </Col>
+                </Row>
+            </Container>
+        );
+    }
+
     return (
         <Container fluid>
             <Row>
                 <Col className="mt-5 d-flex justify-content-center">
-                    <Image src={country.flags.svg} />
+                    <Image className="rounded" style={{
+                        width: '70%',
+                    }} src={country.flags.svg} />
                 </Col>
-                <Col>
+                <Col className="mt-5 d-flex justify-content-center flex-column">
                     <h2>{country.name.common}</h2>
                     <h3>{country.capital}</h3>
 
@@ -62,12 +82,15 @@ const CountrySingle = (props) => {
                             src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
                         />
                     </div>
-                    <Button variant="light" onClick={() => navigate("/countries")}>
+                    <Button variant="light" style={{
+                        width: '40%',
+                        maxWidth: 'fit content'
+                    }} onClick={() => navigate("/countries")}>
                         Back to Countries
                     </Button>
                 </Col>
             </Row>
-        </Container>
+        </Container >
     );
 
     // Cases we will cover together are: Country capital image

@@ -68,7 +68,7 @@ const Favourites = () => {
             </Row>
             <Col className="mt-5 d-flex justify-content-center">
 
-                <Button onClick={() => dispatch(clearFavourites())}>
+                <Button variant="light" onClick={() => dispatch(clearFavourites())}>
                     Clear Favourites
                 </Button>
 
