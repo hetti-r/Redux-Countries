@@ -2,9 +2,9 @@
 
 A full-stack app for searching countries and showing basic country and weather info fetched from APIs. Has loggin and registation form and functionality to add personal favourite countries.
 
-![landing page preview](preview.png)
+## [Live Page](https://reactreduxcountries.netlify.app/)
 
-### -> [Live Page](https://reactreduxcountries.netlify.app/)
+![landing page preview](preview.png)
 
 ## Functionality
 
