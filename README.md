@@ -4,6 +4,8 @@ A full-stack app for searching countries and showing basic country and weather i
 
 ![landing page preview](preview.png)
 
+### [Live Page](https://reactreduxcountries.netlify.app/)
+
 ## Functionality
 
 - Authentication: user's login information and favourite countries are stored in the database
@@ -19,8 +21,6 @@ A full-stack app for searching countries and showing basic country and weather i
 - State management: Redux, Redux Toolkit
 - Styling: Bootstrap, React Icons
 - APIs: Rest Countries, Firebase Firestore, Open Weather
-
-### [Live Page](https://reactreduxcountries.netlify.app/)
 
 ![countries page preview](preview2.png)
 
