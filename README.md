@@ -4,7 +4,7 @@ A full-stack app for searching countries and showing basic country and weather i
 
 ![landing page preview](preview.png)
 
-### [Live Page](https://reactreduxcountries.netlify.app/)
+### -> [Live Page](https://reactreduxcountries.netlify.app/)
 
 ## Functionality
 
