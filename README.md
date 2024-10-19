@@ -1,6 +1,7 @@
 # React + Redux Countries App
 
 A full-stack app for searching countries and showing basic country and weather info fetched from APIs. Has loggin and registation form and functionality to add personal favourite countries.
+
 ![landing page preview](preview.png)
 
 ## Functionality
@@ -25,7 +26,7 @@ A full-stack app for searching countries and showing basic country and weather i
 
 ## Credits
 
-This project was part of the course taught by [Martin Holland](https://github.com/martin-holland) at Business College Helsinki.
+This project was part of the React Advanced course taught by [Martin Holland](https://github.com/martin-holland) at Business College Helsinki.
 
 Vector icons seeing in the site were edited from [svgrepo](https://www.svgrepo.com/)
 
