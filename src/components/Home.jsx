@@ -12,7 +12,7 @@ const Home = () => {
                 <Col md={6} className="text-center">
                     <img src={homeImage} alt="globe" className="img-fluid mb-2" style={{ width: "40%" }} />
                     <h2>Countries App</h2>
-                    <p>This website was made for React Advanced course taught by Marting Holland at the Business College Helsinki. It has loggin and registation functions using Firebae and APIs to fetch and showcase country and weather data.</p>
+                    <p>This website was made for React Advanced course taught by Marting Holland at the Business College Helsinki. It has loggin and registation functions using Firebase and APIs to fetch and showcase country and weather data.</p>
                 </Col>
             </Row>
         </Container>
